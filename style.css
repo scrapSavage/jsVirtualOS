@@ -1,0 +1,22 @@
+body {
+  background-color:#222228;
+  background: linear-gradient(to left, #222228, #44444c);
+  padding:0px;
+  margin:0px;
+  overflow: hidden;
+}
+.view-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  margin: 0px;
+}
+.view-container > canvas {
+  margin: 0px;
+  padding: 0px;
+  width:min(125vw,125vh);
+  image-rendering: pixelated;
+  cursor: none;
+}
