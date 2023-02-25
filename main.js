@@ -132,6 +132,14 @@ function printChar(char,x,y,col,bg) {
 		}
 	}
 }
+function rectfill(x1,y1,x2,y2,col) {
+	for (let x=0;x<x2-x1;++x) {
+		for (let y=0;y<y2-y1;++y) {
+			pset(x+x1,y+y1,col)
+		}
+	}
+
+}
 function print(string,x,y,col,bg) {
 	for (let i=0;i<string.length;++i) {
 		printChar(string.substring(i,i+1),x+i*8,y,col,bg)
@@ -173,42 +181,26 @@ let time = Date.now()-_time
 clip()
 for (let i=0;i<x_resolution;++i) {
 	for	(let b=0;b<y_resolution;++b) {
-		pset(i,b,11)
+		pset(i,b,0)
 	}
 }
-for (let i=0;i<x_resolution;++i) {
-	pset(i,64+Math.sin(i/32+time/2048)*32,4)
+for (let i=0;i<palette.length;++i) {
+	let x = x_resolution/2-Math.sin(i/palette.length*4+time/512)*Math.cos(time/512)*64
+	let y = y_resolution/2-Math.cos(i/palette.length*4+time/512)*64
+	rectfill(x,y,x+8,y+8,i)
 }
-for (let i=0;i<x_resolution;++i) {
-	pset(i,96+Math.cos(i/32+time/2048)*32,14)
-}
-let str = "TURNS OUT THE THOUGHTS IN"
-let str2 = "MY HEAD ARE CALLED COROUTINES"
-let gradient = [2,8,7,13,5,14,1]
-for (let col=0;col<7;++col) {
-	for (let i=0;i<str.length;++i) {
-		let t1 = time/360*30 + i*4 - col*2
-		let x = x_resolution/2-str.length*8/2+i*8 + Math.cos(t1/90)*3
-		let y = y_resolution/2+col-7+ Math.cos(t1/50)*5
-		printChar(str.substring(i,i+1),x,y,gradient[col],17)
-	}
-	}
-	for (let col=0;col<7;++col) {
-		for (let i=0;i<str2.length;++i) {
-			let t1 = time/360*30 + i*4 - col*2
-			let x = x_resolution/2-str.length*8/2+i*8 + Math.cos(t1/90)*3
-			let y = y_resolution/2+col-7+ Math.cos(t1/50)*5
-			printChar(str2.substring(i,i+1),x-16,y+32,gradient[col],17)
-		}
-		}
-		pset(mouse.x,mouse.y,15)
-		pset(mouse.x+1,mouse.y,15)
-		pset(mouse.x,mouse.y+1,15)
-		pset(mouse.x+2,mouse.y,15)
-		pset(mouse.x,mouse.y+2,15)
-		pset(mouse.x+1,mouse.y+1,15)
-		pset(mouse.x+2,mouse.y+2,15)
 
+	pset(mouse.x,mouse.y,15)
+	pset(mouse.x+1,mouse.y,15)
+	pset(mouse.x,mouse.y+1,15)
+	pset(mouse.x+2,mouse.y,15)
+	pset(mouse.x,mouse.y+2,15)
+	pset(mouse.x+1,mouse.y+1,15)
+	pset(mouse.x+2,mouse.y+2,15)
+
+for (let i=0;i<32;++i) {
+printChar(String.fromCharCode(64+Math.random()*32),i*8,Math.sin((time+i*32)/512)*8+16,Math.random()*palette.length, Math.random()*palette.length)
+}
 render_screen(image,canvas,context)
 context.drawImage(image, canvas.width, canvas.height)
 requestAnimationFrame(draw)
