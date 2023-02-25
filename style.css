@@ -19,5 +19,5 @@ body {
   width:min(125vw,125vh);
   image-rendering: pixelated;
   cursor: none;
+  image-rendering: crisp-edges !important;
 }
-/* 🚩 */

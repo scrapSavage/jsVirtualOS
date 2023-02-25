@@ -10,7 +10,6 @@ function init() {
   })
   draw()
 }
-//test
 function hex_to_bin(hex){
     return (parseInt(hex, 16).toString(2)).padStart(8, "0");
 }
@@ -20,17 +19,30 @@ let this_time = new Date()
 let fps = 1000 / (this_time - last_time);
 let time = Date.now()-_time
 clip()
+
+//clear screen
 for (let i=0;i<x_resolution;++i) {
 	for	(let b=0;b<y_resolution;++b) {
 		pset(i,b,0)
 	}
 }
-for (let i=0;i<palette.length;++i) {
-	let x = x_resolution/2-Math.sin(i/palette.length*4+time/512)*Math.cos(time/512)*64
-	let y = y_resolution/2-Math.cos(i/palette.length*4+time/512)*64
-	rectfill(x,y,x+8,y+8,i)
-}
+
 printString("FPS: "+Math.floor(fps),0,y_resolution-8,1, 0)
+
+let segments = 16
+let speed = 0.005
+for (let i=0;i<segments;++i) {
+	let amount = Math.sin(time*speed+i/segments*4)
+	let amount2 = Math.sin(time*speed+i/segments*4+3)
+	let x = amount*64
+	let x2 = amount2*64
+	let y = Math.cos(time*speed+i/segments*4)*4
+	let y2 = Math.cos(time*speed+i/segments*4)*4+3
+	let dist = ~~Math.abs(x2-x)/8
+	printString("-".repeat(Math.abs(dist-1)),x_resolution/2+4-dist*4,i*16+segments*4+y,7,0)
+	printChar("+",x_resolution/2-4+x,i*16+segments*4+y,(amount>amount2)?10:2,0)
+	printChar("+",x_resolution/2-4+x2,i*16+segments*4+y2,(amount<amount2)?10:2,0)
+}
 
 	pset(mouse.x,mouse.y,1)
 	pset(mouse.x+1,mouse.y,1)
@@ -40,9 +52,6 @@ printString("FPS: "+Math.floor(fps),0,y_resolution-8,1, 0)
 	pset(mouse.x+1,mouse.y+1,1)
 	pset(mouse.x+2,mouse.y+2,15)
 
-for (let i=0;i<x_resolution/8;++i) {
-printChar(String.fromCharCode(64+Math.random()*32),i*8,Math.sin((time+i*32)/512)*8+16,1, 0)
-}
 last_time = this_time;
 render_screen()
 requestAnimationFrame(draw)
