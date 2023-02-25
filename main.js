@@ -1,7 +1,7 @@
 const x_resolution=256;
 const y_resolution=192;
 const clip_rect={x:0,y:0,w:x_resolution,h:y_resolution}
-let mouse = {x:0,y:0}// @         A             B               C                 D              E               F               G               H                   I              J          K                  L               M                      N             O             P
+let mouse = {x:0,y:0}
 const font =
 "0000000000000000"+ // <space>
 "183c3c3c18001800"+ // !
