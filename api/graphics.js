@@ -115,7 +115,7 @@ function rectfill(x1,y1,x2,y2,col) {
 	}
 
 }
-function print(string,x,y,col,bg) {
+function printString(string,x,y,col,bg) {
 	for (let i=0;i<string.length;++i) {
 		printChar(string.substring(i,i+1),x+i*8,y,col,bg)
 	}

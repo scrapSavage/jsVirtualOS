@@ -1,7 +1,7 @@
 let mouse = {x:0,y:0}
 
 const _time = Date.now()
-
+let last_time=new Date()
 function init() {
 	let canvas_data = get_canvas_data()
 	// const canvas = canvas_data.canvas
@@ -21,6 +21,8 @@ function hex_to_bin(hex){
 }
 
 function draw() {
+let this_time = new Date()
+let fps = 1000 / (this_time - last_time);
 let time = Date.now()-_time
 clip()
 for (let i=0;i<x_resolution;++i) {
@@ -33,6 +35,7 @@ for (let i=0;i<palette.length;++i) {
 	let y = y_resolution/2-Math.cos(i/palette.length*4+time/512)*64
 	rectfill(x,y,x+8,y+8,i)
 }
+printString("FPS: "+~~fps,0,y_resolution-8,1, 0)
 
 	pset(mouse.x,mouse.y,1)
 	pset(mouse.x+1,mouse.y,1)
@@ -44,9 +47,10 @@ for (let i=0;i<palette.length;++i) {
 
 for (let i=0;i<32;++i) {
 printChar(String.fromCharCode(64+Math.random()*32),i*8,Math.sin((time+i*32)/512)*8+16,1, 0)
+}
+last_time = this_time;
 render_screen(image,canvas,context)
 context.drawImage(image, canvas.width, canvas.height)
-}
 requestAnimationFrame(draw)
 }
 
