@@ -3,11 +3,6 @@ let mouse = {x:0,y:0}
 const _time = Date.now()
 let last_time=new Date()
 function init() {
-	let canvas_data = get_canvas_data()
-	// const canvas = canvas_data.canvas
-	// const context = canvas_data.context
-	// const x_resolution = canvas_data.x_resolution
-	// const y_resolution = canvas_data.y_resolution
   canvas.addEventListener("mousemove",(e) => {
 	let rect = canvas.getBoundingClientRect()
 	mouse.x = (e.clientX-rect.left)/canvas.offsetWidth*x_resolution
@@ -35,7 +30,7 @@ for (let i=0;i<palette.length;++i) {
 	let y = y_resolution/2-Math.cos(i/palette.length*4+time/512)*64
 	rectfill(x,y,x+8,y+8,i)
 }
-printString("FPS: "+~~fps,0,y_resolution-8,1, 0)
+printString("FPS: "+Math.floor(fps),0,y_resolution-8,1, 0)
 
 	pset(mouse.x,mouse.y,1)
 	pset(mouse.x+1,mouse.y,1)
@@ -45,12 +40,11 @@ printString("FPS: "+~~fps,0,y_resolution-8,1, 0)
 	pset(mouse.x+1,mouse.y+1,1)
 	pset(mouse.x+2,mouse.y+2,15)
 
-for (let i=0;i<32;++i) {
+for (let i=0;i<x_resolution/8;++i) {
 printChar(String.fromCharCode(64+Math.random()*32),i*8,Math.sin((time+i*32)/512)*8+16,1, 0)
 }
 last_time = this_time;
-render_screen(image,canvas,context)
-context.drawImage(image, canvas.width, canvas.height)
+render_screen()
 requestAnimationFrame(draw)
 }
 

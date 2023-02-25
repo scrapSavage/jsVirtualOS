@@ -1,7 +1,8 @@
 let canvas
 let context
-let x_resolution=256
-let y_resolution=192
+let image
+let x_resolution=512
+let y_resolution=384
 let clip_rect={x:0,y:0,w:x_resolution,h:y_resolution}
 const font =
 "0000000000000000"+ // <space>
@@ -121,7 +122,7 @@ function printString(string,x,y,col,bg) {
 	}
 }
 
-function render_screen(image, canvas, context) {
+function render_screen() {
 	let image_data = context.getImageData(0,0,x_resolution,y_resolution)
 	let data = image_data.data
 	for (let x=0; x<screen.length;  ++x) {
@@ -135,6 +136,7 @@ function render_screen(image, canvas, context) {
 		}
   	}
   	context.putImageData(image_data, 0, 0)
+    context.drawImage(image, canvas.width, canvas.height)
 }
 
 function clip(x,y,w,h) {
@@ -164,7 +166,11 @@ for (let x=0; x<x_resolution;  ++x) {
     }
     screen[x]=column
 }
-init()
+printString("Due to web broswer autoplay policies you must click".toUpperCase(),8,8,1,0)
+printString("the display to finish the initialization process".toUpperCase(),8,16,1,0)
+printString("potential volume warning!!!".toUpperCase(),8,64,10,2)
+render_screen()
+init_audio()
 }
 
 function get_canvas_data() {
