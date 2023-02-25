@@ -4,10 +4,10 @@ const _time = Date.now()
 
 function init() {
 	let canvas_data = get_canvas_data()
-	const canvas = canvas_data.canvas
-	const context = canvas_data.context
-	const x_resolution = canvas_data.x_resolution
-	const y_resolution = canvas_data.y_resolution
+	// const canvas = canvas_data.canvas
+	// const context = canvas_data.context
+	// const x_resolution = canvas_data.x_resolution
+	// const y_resolution = canvas_data.y_resolution
   canvas.addEventListener("mousemove",(e) => {
 	let rect = canvas.getBoundingClientRect()
 	mouse.x = (e.clientX-rect.left)/canvas.offsetWidth*x_resolution
