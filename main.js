@@ -46,6 +46,9 @@ for (let i=0;i<segments;++i) {
 	rectfill(p1.x-size/2,p1.y-size/2,p1.x+size/2,p1.y+size/2,2)
 	rectfill(p2.x-size/2,p2.y-size/2,p2.x+size/2,p2.y+size/2,14)
 }
+printString(" !\"#$%\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`",0,0,1,12)
+printString("abcdefghijklmnopqrstuvwxyz{|}~",0,8,1,12)
+
 line(mouse.x,mouse.y,mouse.x+8,mouse.y+8,1)
 line(mouse.x,mouse.y,mouse.x+4,mouse.y,1)
 line(mouse.x,mouse.y,mouse.x,mouse.y+4,1)
