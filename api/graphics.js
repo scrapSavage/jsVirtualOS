@@ -122,6 +122,63 @@ function printString(string,x,y,col,bg) {
 	}
 }
 
+function line(x1, y1, x2, y2,col) {
+    let x, y, xe, ye
+    let dx = x2 - x1
+    let dy = y2 - y1
+    let dx1 = Math.abs(dx)
+    let dy1 = Math.abs(dy)
+    let px = 2 * dy1 - dx1
+    let py = 2 * dx1 - dy1
+    if (dy1 <= dx1) {
+        if (dx >= 0) {
+            x = x1; y = y1; xe = x2;
+        } else {
+            x = x2; y = y2; xe = x1;
+        }
+        pset(x, y, col)
+        for (let i = 0; x < xe; i++) {
+            x+=1;
+            if (px < 0) {
+                px = px + 2 * dy1;
+            } else {
+                if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) {
+                    y+=1
+                } else {
+                    y-=1
+                }
+                px = px + 2 * (dy1 - dx1)
+            }
+            pset(x, y, col)
+        }
+    } else {
+        if (dy >= 0) {
+            x = x1
+            y = y1
+            ye = y2
+        } else {
+            x = x2
+            y = y2
+            ye = y1
+        }
+        pset(x, y, col)
+        for (i = 0; y < ye; i++) {
+            y+=1
+            if (py <= 0) {
+                py+=2 * dx1
+            } else {
+                if ((dx < 0 && dy<0) || (dx > 0 && dy > 0)) {
+                    x+=1
+                } else {
+                    x-=1
+                }
+                py+=2*(dx1 - dy1)
+            }
+            pset(x, y, col);
+        }
+    }
+ }
+
 function render_screen() {
 	let image_data = context.getImageData(0,0,x_resolution,y_resolution)
 	let data = image_data.data
