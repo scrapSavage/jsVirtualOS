@@ -11,5 +11,5 @@ function init_audio() {
 function foo() {
     a = true
 
-    init()
+    init_filesystem()
 }
