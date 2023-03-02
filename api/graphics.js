@@ -100,7 +100,7 @@ const font =
 "060c0c180c0c0600"+ // {
 "1818181818181800"+ // |
 "6030301830306000"+ // }
-"727e5c0000000000"+ // ~
+"0000324c00000000"+ // ~
 ""
 const palette = [
  {red:0,green:0,blue:0}, // black 0
@@ -125,6 +125,8 @@ function pset(x,y,col) {
 	screen[~~x][~~y]=~~col
 }
 let last_print_x = 0
+let last_col = 1;
+let last_bg = 0;
 let caret = {x:0,y:0}
 function printChar(char,x,y,col,bg) {
     if (char=="\n") { caret.x=last_print_x; caret.y+=8 }
@@ -139,6 +141,8 @@ function printChar(char,x,y,col,bg) {
 }
 function printString(string,x,y,col,bg) {
     last_print_x = x
+    last_col = col
+    last_bg = bg
     caret.y = y
     caret.x = x
 	for (let i=0;i<string.length;++i) {
